@@ -6,9 +6,12 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import plotter
 import utils
-import logging
 import matplotlib.backends.backend_pdf
 import csv
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None):
     pdf = matplotlib.backends.backend_pdf.PdfPages("./output.pdf")
@@ -42,13 +45,13 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None):
         #print(best_basis_functions)
         running_score = numpy.zeros(len(overall_target_score))
         for pair, [basis_scores, best_basis_function, p_val, r_sq] in best_basis_functions.items():
-            #logging.info(target_var)
-            #logging.info(pair)
-            #logging.info(best_basis_function.function_shape)
-            #logging.info(len(basis_scores))
-            #logging.info(p_val)
-            #logging.info(r_sq)
-            print(pair)
+            logging.debug(target_var)
+            logging.debug(pair)
+            logging.debug(best_basis_function.function_shape)
+            logging.debug(len(basis_scores))
+            logging.debug(p_val)
+            logging.debug(r_sq)
+            logging.info("Combined: " + str(pair))
             running_score += numpy.array(basis_scores)
             content = [str(pair)]
             content.extend(basis_scores)

@@ -4,19 +4,11 @@ import re
 from collections import defaultdict
 import pprint
 import matplotlib.pyplot as plt
-
+import utils
 import yaml
 import logging
 
-import utils
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.StreamHandler()
-    ]
-)
+logger = logging.getLogger(__name__)
 
 class Dataset(object):
   def __init__(self, dataset_yml):
@@ -192,6 +184,10 @@ class Dataset(object):
 
     self.team_diqualifications_by_attr = defaultdict(list)
     self.member_diqualifications_by_attr = defaultdict(list)
+
+    #TODO clean this up
+    #See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+    pd.set_option('mode.chained_assignment', None)
 
     teams_to_delete = []
 

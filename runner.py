@@ -5,23 +5,25 @@ import plotter
 
 import logging
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.StreamHandler()
-    ]
-)
-
 parser = argparse.ArgumentParser(description=
                                  """This will run through the code described in [paper X].\n
                                  For more information see [website Y]."""
                                  )
 parser.add_argument("yml", help=".yml file with config values")
 parser.add_argument("-p", "--p-threshold", help="p-val threshold for when to print output", default=0.05)
+parser.add_argument("-v", "--verbose", help="verbosity of logging [10: Debug, 20: Info <default>, 30: Warning, etc]", default=20)
 args = parser.parse_args()
 config = vars(args)
-print(config)
+
+logging.basicConfig(
+    level=config["verbose"],
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler()
+    ]
+)
+
+logging.info("Configs: " + str(config))
 
 def main():
     if "p_threshold" in config:
@@ -30,7 +32,6 @@ def main():
         p_thresh = 0.05
 
     scorer_obj = scorer.Scorer(config["yml"], UpMidDownBasisSpace())
-    assert(False)
     scorer.combiner(config["yml"], UpMidDownBasisSpace(), p_thresh=p_thresh, scorer=scorer_obj)
 
 
