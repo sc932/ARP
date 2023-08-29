@@ -11,13 +11,12 @@ import logging
 import utils
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         logging.StreamHandler()
     ]
 )
-
 
 class Dataset(object):
   def __init__(self, dataset_yml):
@@ -177,16 +176,19 @@ class Dataset(object):
       spaces = self.dataset_config['missing_values']['spaces']
     else:
       spaces = False
+    logging.debug("Looking for spaces: " + str(spaces))
 
     if cog_attr_vals == None:
       cog_attr_vals = self.dataset_config['missing_values']['cog_attr_vals']
     else:
       cog_attr_vals = []
+    logging.debug("Removing these cog_attr_vals: " + str(cog_attr_vals))
 
     if other_vals == None:
       other_vals = self.dataset_config['missing_values']['other_vals']
     else:
       other_vals = []
+    logging.debug("Removing these other vals: " + str(other_vals))
 
     self.team_diqualifications_by_attr = defaultdict(list)
     self.member_diqualifications_by_attr = defaultdict(list)
@@ -194,18 +196,25 @@ class Dataset(object):
     teams_to_delete = []
 
     for i, member in self.full_orig_dataframe.iterrows():
+      logging.debug("Reviewing member: " + str(i))
+      logging.debug(str(member))
       if 'team_index_cap' in self.dataset_config:
         if int(member[self.team_idx_name]) > self.dataset_config['team_index_cap']:
           teams_to_delete.append(member[self.team_idx_name])
           continue
       for attr in self.combined_attr_list:
+        if numpy.isnan(member[attr]):
+          self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
+          self.member_diqualifications_by_attr[attr].append(i)
+          self.full_orig_dataframe[attr][i] = -1
+          teams_to_delete.append(member[self.team_idx_name])
         if spaces and re.match('\s+', str(member[attr])):
           self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
           self.member_diqualifications_by_attr[attr].append(i)
           self.full_orig_dataframe[attr][i] = -1
           teams_to_delete.append(member[self.team_idx_name])
         for bad_val in other_vals:
-          if bad_val == str(member[attr]):
+          if float(bad_val) == member[attr]:
             self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
             self.member_diqualifications_by_attr[attr].append(i)
             self.full_orig_dataframe[attr][i] = -1

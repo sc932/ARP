@@ -12,7 +12,8 @@ performance (see citation).
 
 ### Using Google Collab (free, but Google account required)
 
-1. 
+1. First, download the git repo and put it in your Google Drive
+2. Open 
 
 ## Local Installation
 
@@ -101,4 +102,47 @@ options:
 5. Follow the instructions (example below)
 ```
 python3 runner.py Fall2013Fordham_Scott.yml -p 0.05
+```
+
+## Configuration
+
+### The YAML config file
+
+YAML is a markup language that allows for easy configuration of complex tasks.
+For more information check out LINK
+
+### Example YAML file
+
+```
+# Example ARP YAML file for more information see README.md
+# For help editing a YAML file see link in README.md
+
+### REQUIRED CONFIGS ###
+csv_file_name: 'example.csv' # path to csv file with dataset
+
+team_index: 'OvrTeamID' # column name with group id in it
+
+target_vars: ['Perf'] # can be one or more, seperated by commas
+
+big_five: # mapping from csv column name to standard Big 5 names, put # in front of those you wish to ignore
+  #Extraverted: 'Extraversion'
+  Agreeable: 'Agreeable'
+  #Conscientious: 'Conscientiousness'
+  Neurotic: 'Neurotic'
+  #Open: 'Openness'
+
+### OPTIONAL CONFIGS ###
+cog_attrs: [] # cognitive attributes (like GRE, GPA, etc)
+
+pos_attrs: [] # positive NON-Big-5, NON-cognitive attributes (like teamwork, etc)
+
+neg_attrs: [] # negative NON-Big-5, NON-cognitive attributes (like dark triade, etc)
+
+neutral_attrs: [] #'age', 'Sex', 'LANGU', 'NATION', 'ETHNIC', 'COMPANY', 'JOBTITLE', 'JOBDEPT', 'jobcity', 'job_geog', 'JOB_INDUS', 'JOB_FUNC']
+
+### HOW TO DEAL WITH "BAD" DATA ###
+missing_values:
+  cog_attr_vals: ['0', ] # Teams with members that have these scores for cog_attr with be ignored
+  spaces: True # True if teams with members that have whitespace/blanks instead of values should be ignored, otherwise False
+  other_vals: ['-9999', ] # Teams with members that have these attribute values will be ignored
 ```
