@@ -12,6 +12,7 @@ parser = argparse.ArgumentParser(description=
 parser.add_argument("yml", help=".yml file with config values")
 parser.add_argument("-p", "--p-threshold", help="p-val threshold for when to print output", default=0.05)
 parser.add_argument("-v", "--verbose", help="verbosity of logging [10: Debug, 20: Info <default>, 30: Warning, etc]", default=20)
+parser.add_argument("-o", "--output", help="the name of the output file <default: [name of .yml file + _output]>")
 args = parser.parse_args()
 config = vars(args)
 
@@ -31,8 +32,15 @@ def main():
     else:
         p_thresh = 0.05
 
+    if "output" in config and config["output"] is not None:
+        output = str(config["output"])
+    else:
+        output = str(config["yml"])[:-4] + "_output"
+
+    logging.warning(output)
+
     scorer_obj = scorer.Scorer(config["yml"], UpMidDownBasisSpace())
-    scorer.combiner(config["yml"], UpMidDownBasisSpace(), p_thresh=p_thresh, scorer=scorer_obj)
+    scorer.combiner(config["yml"], UpMidDownBasisSpace(), p_thresh=p_thresh, scorer=scorer_obj, output=output)
 
 
 if __name__ == "__main__":

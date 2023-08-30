@@ -13,8 +13,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None):
-    pdf = matplotlib.backends.backend_pdf.PdfPages("./output.pdf")
+def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output="output"):
+    pdf = matplotlib.backends.backend_pdf.PdfPages("./" + output + ".pdf")
     csv_content = []
 
 
@@ -70,14 +70,14 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None):
     #plt.show()
 
     pdf.close()
-    logging.info("All plots saved to output.pdf")
-    with open("output.csv", 'w', newline='') as csv_file:
+    logging.info("All plots saved to output pdf: " + output + ".pdf")
+    with open(output + ".csv", 'w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=' ',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
         rows = zip(*csv_content)
         for row in rows:
             writer.writerow(row)
-    logging.info("All data saved to output.csv")
+    logging.info("All data saved to output csv: " + output + ".csv")
 
         
 class Scorer(object):

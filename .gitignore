@@ -3,3 +3,5 @@ data/*
 scratch/
 output/*
 *.pyc
+*.pdf
+example.csv
