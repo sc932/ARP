@@ -5,3 +5,4 @@ output/*
 *.pyc
 *.pdf
 *_output.csv
+.ipynb_checkpoints/*

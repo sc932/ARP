@@ -1,7 +1,6 @@
 import argparse
 import scorer
 from basis_space import UpDownBasisSpace, UpMidDownBasisSpace
-import plotter
 
 import logging
 
@@ -36,8 +35,6 @@ def main():
         output = str(config["output"])
     else:
         output = str(config["yml"])[:-4] + "_output"
-
-    logging.warning(output)
 
     scorer_obj = scorer.Scorer(config["yml"], UpMidDownBasisSpace())
     scorer.combiner(config["yml"], UpMidDownBasisSpace(), p_thresh=p_thresh, scorer=scorer_obj, output=output)
