@@ -4,4 +4,4 @@ scratch/
 output/*
 *.pyc
 *.pdf
-example.csv
+*_output.csv
