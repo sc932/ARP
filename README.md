@@ -72,9 +72,10 @@ pip3 install requirements.txt
 
 ## Running ARP
 
-### Writing your YAML configuration file
+### Using Jupyter Notebook
 
-1. Open a text editor of your choice (suggestions below)
+1. Open the `runner.ipynb` notebook and execute both cells
+2. Write your own YAML file for your data as needed (see below)
 
 ### In a terminal
 
@@ -101,8 +102,10 @@ options:
 ```
 5. Follow the instructions (example below)
 ```
-python3 runner.py Fall2013Fordham_Scott.yml -p 0.05
+python3 runner.py example.yml -p 0.05
 ```
+
+6. Write your own YAML file for your data as needed (see below)
 
 ## Configuration
 
