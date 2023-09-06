@@ -197,26 +197,27 @@ class Dataset(object):
 
     for i, member in self.full_orig_dataframe.iterrows():
       logging.debug("Reviewing member: " + str(i))
-      logging.debug(str(member))
       if 'team_index_cap' in self.dataset_config:
         if int(member[self.team_idx_name]) > self.dataset_config['team_index_cap']:
           teams_to_delete.append(member[self.team_idx_name])
           continue
       for attr in self.combined_attr_list:
-        if numpy.isnan(member[attr]):
-          logging.debug("Removing member: " + str(i) + " for NaN attribute")
-          self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
-          self.member_diqualifications_by_attr[attr].append(i)
-          self.full_orig_dataframe[attr][i] = -1
-          teams_to_delete.append(member[self.team_idx_name])
+        logging.debug("Reviewing attribute: " + str(attr) + " with value: " + member[attr] + " and type " + str(type(member[attr])))
         if spaces and re.match('\s+', str(member[attr])):
           logging.debug("Removing member: " + str(i) + " for spaces only (\s+) attribute")
           self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
           self.member_diqualifications_by_attr[attr].append(i)
           self.full_orig_dataframe[attr][i] = -1
           teams_to_delete.append(member[self.team_idx_name])
+          continue
+        if numpy.isnan(float(member[attr])):
+          logging.debug("Removing member: " + str(i) + " for NaN attribute")
+          self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
+          self.member_diqualifications_by_attr[attr].append(i)
+          self.full_orig_dataframe[attr][i] = -1
+          teams_to_delete.append(member[self.team_idx_name])
         for bad_val in other_vals:
-          if float(bad_val) == member[attr]:
+          if float(bad_val) == float(member[attr]):
             logging.debug("Removing member: " + str(i) + " for attribute with specified bad value from yml file")
             self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
             self.member_diqualifications_by_attr[attr].append(i)
