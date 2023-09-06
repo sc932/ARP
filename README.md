@@ -12,8 +12,8 @@ performance (see citation).
 
 ### Using Google Collab (free, but Google account required)
 
-1. First, download the git repo and put it in your Google Drive
-2. Open 
+1. First, download the git repo (try using the github client: https://desktop.github.com/) and put it in your Google Drive
+2. Open the notebook
 
 ## Local Installation
 

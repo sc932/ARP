@@ -161,6 +161,10 @@ class Dataset(object):
       self.goal_medians[target] = median
       logging.debug("Normalized target variable: " + target + " mean: " + str(mean) + " median: " + str(median))
 
+    logging.debug("Remaining members (and their teams)")
+    logging.debug(self.normalized_dataframe[self.dataset_config['team_index']])
+    self.num_clean_teams = self.normalized_dataframe[self.dataset_config['team_index']].nunique()
+
     logging.info("Normalized all target variables")
 
   def clean_out_blanks(self, spaces=None, cog_attr_vals=None, other_vals=None):
@@ -200,23 +204,27 @@ class Dataset(object):
           continue
       for attr in self.combined_attr_list:
         if numpy.isnan(member[attr]):
+          logging.debug("Removing member: " + str(i) + " for NaN attribute")
           self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
           self.member_diqualifications_by_attr[attr].append(i)
           self.full_orig_dataframe[attr][i] = -1
           teams_to_delete.append(member[self.team_idx_name])
         if spaces and re.match('\s+', str(member[attr])):
+          logging.debug("Removing member: " + str(i) + " for spaces only (\s+) attribute")
           self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
           self.member_diqualifications_by_attr[attr].append(i)
           self.full_orig_dataframe[attr][i] = -1
           teams_to_delete.append(member[self.team_idx_name])
         for bad_val in other_vals:
           if float(bad_val) == member[attr]:
+            logging.debug("Removing member: " + str(i) + " for attribute with specified bad value from yml file")
             self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
             self.member_diqualifications_by_attr[attr].append(i)
             self.full_orig_dataframe[attr][i] = -1
             teams_to_delete.append(member[self.team_idx_name])
         for cog_attr_val in cog_attr_vals:
           if attr in self.cog_attr_list and str(member[attr]) == cog_attr_val:
+            logging.debug("Removing member: " + str(i) + " for attribute with specified bad value for cog attribute in yml file")
             self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
             self.member_diqualifications_by_attr[attr].append(i)
             self.full_orig_dataframe[attr][i] = -1
@@ -235,4 +243,6 @@ class Dataset(object):
     else:
       self.clean_dataframe = self.full_orig_dataframe.copy()
 
-    logging.info("Cleaned out " + str(len(teams_to_delete)) + " teams")
+    
+
+    logging.info("Cleaned out " + str(len(teams_to_delete)) + " teams: " + str(teams_to_delete))

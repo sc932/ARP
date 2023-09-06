@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import re
 from operator import itemgetter
+import logging
+
+logger = logging.getLogger(__name__)
 
 def plot_basis_space(basis_space):
     for basis_function in basis_space.basis_functions:
@@ -24,6 +27,30 @@ def plot_basis_with_pairwise_data(basis_function, dataset, a1, a2):
     attribute_pair_thetas, attribute_pair_rs = dataset.get_pairwise_attributes_polar_values(a1, a2)
     ax2.scatter(attribute_pair_thetas, attribute_pair_rs, c='orange', alpha=0.1)
     basis_function.plot(ax1, ax2, ax3, attribute_pair=[a1, a2])
+
+def plot_full_analysis_for_sum(scorer, target_var, best_basis_functions, p_thresh=0.1, pdf=None):
+    fig = plt.figure(figsize=(12,6))
+    fig.suptitle("Analysis for sum of all attribute pairs \n" + scorer.dataset.dataset_config['csv_file_name'] + " target_var: " + target_var + "")
+    
+    basis_sum = numpy.zeros(scorer.dataset.num_clean_teams)
+    logging.debug(scorer.dataset.num_clean_teams)
+    target_scores = numpy.zeros(scorer.dataset.num_clean_teams)
+    for pair, [basis_scores, best_basis_function, p_val, r_sq] in best_basis_functions.items():
+        [p_val, r_sq, basis_function, target_scores, basis_scores] = scorer.best_score_data[target_var][(pair[0], pair[1])][0]
+        logging.debug(pair)
+        logging.debug(basis_scores)
+        basis_sum += basis_scores
+        target_scores = target_scores
+
+    ax = plt.subplot(111)
+    plot_fit(basis_sum, target_scores, title="", ax=ax)
+
+    if pdf is None:
+        fig_str = "Pairwise analysis - " + scorer.dataset.dataset_config['csv_file_name'][:-4] + " - (" + a1 + ", " + a2 + ") to " + target_var + ".pdf"
+
+        fig.savefig(fig_str)
+    else:
+        pdf.savefig(fig)
 
 def plot_full_analysis(scorer, target_var, a1, a2, p_thresh=0.1, pdf=None):
     fig = plt.figure(figsize=(12,12))

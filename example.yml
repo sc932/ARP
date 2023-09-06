@@ -26,6 +26,6 @@ neutral_attrs: [] #'age', 'Sex', 'LANGU', 'NATION', 'ETHNIC', 'COMPANY', 'JOBTIT
 
 ### HOW TO DEAL WITH "BAD" DATA ###
 missing_values:
-  cog_attr_vals: ['0', ] # Teams with members that have these scores for cog_attr with be ignored
+  cog_attr_vals: ['0'] # Teams with members that have these scores for cog_attr with be ignored
   spaces: True # True if teams with members that have whitespace/blanks instead of values should be ignored, otherwise False
   other_vals: ['-9999', ] # Teams with members that have these attribute values will be ignored

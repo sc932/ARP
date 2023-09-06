@@ -21,3 +21,9 @@ class UpMidDownBasisSpace(BasisSpace):
                 for x3 in [-1, 0, 1]:
                     for x4 in [-1, 0, 1]:
                         self.basis_functions.append(UpDownBasisFunction(function_shape=[x1, x2, x3, x4]))
+
+class SymetricUpDownTwo(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1]))
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1]))

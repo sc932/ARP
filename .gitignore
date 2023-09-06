@@ -6,3 +6,4 @@ output/*
 *.pdf
 *_output.csv
 .ipynb_checkpoints/*
+*_output_b*.csv
