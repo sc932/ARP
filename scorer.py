@@ -7,22 +7,27 @@ import matplotlib.pyplot as plt
 import plotter
 import utils
 import matplotlib.backends.backend_pdf
-import csv
+
 
 import logging
 
 logger = logging.getLogger(__name__)
 
-def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output="output"):
-    pdf = matplotlib.backends.backend_pdf.PdfPages("./" + output + ".pdf")
-    csv_content = []
+def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output="output", pdf=None, csv_content=None, all_one=False):
+    if pdf == None:
+        pdf = matplotlib.backends.backend_pdf.PdfPages("./" + output + ".pdf")
+    if csv_content == None:
+        csv_content = []
 
     if scorer is None:
         scorer = Scorer(dataset_yml, basis_space_to_use)
 
-    content = [scorer.dataset.team_idx_name]
-    content.extend(scorer.dataset.get_team_ids())
-    csv_content.append(content)
+    if len(csv_content) == 0:
+        content = [scorer.dataset.team_idx_name]
+        content.extend(scorer.dataset.get_team_ids())
+        csv_content.append(content)
+    else:
+        content = []
 
     for target_var in scorer.dataset.target_vars:
         
@@ -52,7 +57,10 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
             logging.debug(r_sq)
             logging.info("Combined: " + str(pair))
             running_score += numpy.array(basis_scores)
-            content = [str(pair)]
+            if not all_one:
+                content = [str(pair)]
+            else:
+                content = [str(pair) + "_b-" + str(basis_function.function_shape)]
             content.extend(basis_scores)
             csv_content.append(content)
 
@@ -71,15 +79,11 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
 
     #plt.show()
 
-    pdf.close()
+    if not all_one:
+        pdf.close()
     logging.info("All plots saved to output pdf: " + output + ".pdf")
-    with open(output + ".csv", 'w', newline='') as csv_file:
-        writer = csv.writer(csv_file, delimiter=' ',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        rows = zip(*csv_content)
-        for row in rows:
-            writer.writerow(row)
-    logging.info("All data saved to output csv: " + output + ".csv")
+    return csv_content
+    
  
 class Scorer(object):
     def __init__(self, dataset_yml, basis_space_to_use, force_fit=False):

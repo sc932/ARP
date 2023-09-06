@@ -5,13 +5,13 @@ team_index: 'OvrTeamID' # column name with group id in it
 target_vars: ['Perf']
 
 big_five: # mapping from csv column name to standard Big 5 names
-  #Extraverted: 'Extraversion'
+  Extraverted: 'Extraversion'
   Agreeable: 'Agreeable'
-  #Conscientious: 'Conscientiousness'
+  Conscientious: 'Conscientious'
   Neurotic: 'Neurotic'
-  #Open: 'Openness'
+  Open: 'Open'
 
-cog_attrs: [] # cognitive attributes (like GRE, GPA, etc)
+cog_attrs: ['GPA'] # cognitive attributes (like GRE, GPA, etc)
 
 pos_attrs: [] # positive NON-Big-5, NON-cognitive attributes (like teamwork, etc)
 

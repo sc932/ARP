@@ -7,3 +7,5 @@ output/*
 *_output.csv
 .ipynb_checkpoints/*
 *_output_b*.csv
+*_output_all.csv
+*_Scott.yml
