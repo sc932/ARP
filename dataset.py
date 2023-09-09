@@ -112,7 +112,7 @@ class Dataset(object):
       for i, member in self.normalized_dataframe.iterrows():
           attr_val = float(member[attr])
           if not attr_val < 0:
-            if attr == self.big_five_mapping['Neurotic']:
+            if 'Neurotic' in self.big_five_mapping and attr == self.big_five_mapping['Neurotic']:
               attr_val = max - attr_val
             remapped_attr_val = (attr_val - min)/(max - min)
             self.normalized_dataframe.loc[i, attr] = remapped_attr_val

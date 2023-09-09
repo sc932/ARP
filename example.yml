@@ -12,7 +12,7 @@ big_five: # mapping from csv column name to standard Big 5 names, put # in front
   #Extraverted: 'Extraversion'
   Agreeable: 'Agreeable'
   Conscientious: 'Conscientious'
-  Neurotic: 'Neurotic'
+  #Neurotic: 'Neurotic'
   Open: 'Open'
 
 ### OPTIONAL CONFIGS ###
