@@ -13,6 +13,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def csv_safe_pair_txt(pair):
+    txt = "(" + pair[0] + ";" + pair[1] + ")"
+    return txt
+
 def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output="output", pdf=None, csv_content=None, all_one=False):
     if pdf == None:
         pdf = matplotlib.backends.backend_pdf.PdfPages("./" + output + ".pdf")
@@ -55,12 +59,12 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
             logging.debug(len(basis_scores))
             logging.debug(p_val)
             logging.debug(r_sq)
-            logging.info("Combined: " + str(pair))
+            logging.info("Combined: " + csv_safe_pair_txt(pair))
             running_score += numpy.array(basis_scores)
             if not all_one:
-                content = [str(pair)]
+                content = [csv_safe_pair_txt(pair)]
             else:
-                content = [str(pair) + "_b-" + str(basis_function.csv_safe_shape())]
+                content = [csv_safe_pair_txt(pair) + "_b-" + str(basis_function.csv_safe_shape())]
             content.extend(basis_scores)
             csv_content.append(content)
 

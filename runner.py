@@ -93,6 +93,7 @@ def main():
 
 
 def write_to_csv(output, csv_content):
+    # TODO, try to catch if it is open/protected and suggest to the user to close it
     with open(output + ".csv", 'w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
