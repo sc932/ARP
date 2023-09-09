@@ -67,7 +67,10 @@ class Dataset(object):
   def load_attr_lists(self):
     self.combined_attr_list = []
 
-    self.big_five_mapping = dict(self.dataset_config['big_five'])
+    if self.dataset_config['big_five'] is not None:
+      self.big_five_mapping = dict(self.dataset_config['big_five'])
+    else:
+      self.big_five_mapping = {}
     self.big_five_reverse_mapping = {v: k for k, v in self.big_five_mapping.items()}
     self.big_five_attr_list = list(self.big_five_mapping.values())
     self.combined_attr_list.extend(self.big_five_attr_list)

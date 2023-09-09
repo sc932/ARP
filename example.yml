@@ -10,13 +10,16 @@ target_vars: ['Perf'] # can be one or more, seperated by commas
 
 big_five: # mapping from csv column name to standard Big 5 names, put # in front of those you wish to ignore
   #Extraverted: 'Extraversion'
-  Agreeable: 'Agreeable'
-  Conscientious: 'Conscientious'
+  #Agreeable: 'Agreeable'
+  #Conscientious: 'Conscientious'
   #Neurotic: 'Neurotic'
-  Open: 'Open'
+  #Open: 'Open'
 
 ### OPTIONAL CONFIGS ###
-cog_attrs: [] # cognitive attributes (like GRE, GPA, etc)
+# Leave blank like this []
+# One value like this ['val']
+# multiple like this ['v1', 'v2', 'v3']
+cog_attrs: ['GPA', 'SAT'] # cognitive attributes (like GRE, GPA, etc)
 
 pos_attrs: [] # positive NON-Big-5, NON-cognitive attributes (like teamwork, etc)
 
