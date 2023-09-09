@@ -94,7 +94,7 @@ def main():
 
 def write_to_csv(output, csv_content):
     with open(output + ".csv", 'w', newline='') as csv_file:
-        writer = csv.writer(csv_file, delimiter=' ',
+        writer = csv.writer(csv_file, delimiter=', ',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
         rows = zip(*csv_content)
         for row in rows:
