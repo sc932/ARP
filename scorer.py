@@ -60,7 +60,7 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
             if not all_one:
                 content = [str(pair)]
             else:
-                content = [str(pair) + "_b-" + str(basis_function.function_shape)]
+                content = [str(pair) + "_b-" + str(basis_function.csv_safe_shape())]
             content.extend(basis_scores)
             csv_content.append(content)
 

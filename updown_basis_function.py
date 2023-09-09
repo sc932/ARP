@@ -20,6 +20,14 @@ class UpDownBasisFunction(BasisFunction):
                 raise Exception
         self.function_shape = function_shape
 
+    def csv_safe_shape(self):
+       txt = "["
+       for shape_param in self.function_shape:
+          txt += str(shape_param)
+          txt += ";"
+       txt += "]"
+       return txt
+
     def eval_from_x_y(self, x_orig, y_orig, x_offset=0, y_offset=0):
         _, theta = utils.polar_from_x_y(x_orig, y_orig, x_offset, y_offset)
         return self.eval(theta)
