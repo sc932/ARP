@@ -202,7 +202,7 @@ class Dataset(object):
           teams_to_delete.append(member[self.team_idx_name])
           continue
       for attr in self.combined_attr_list:
-        logging.debug("Reviewing attribute: " + str(attr) + " with value: " + member[attr] + " and type " + str(type(member[attr])))
+        logging.debug("Reviewing attribute: " + str(attr) + " with value: " + str(member[attr]) + " and type " + str(type(member[attr])))
         if spaces and re.match('\s+', str(member[attr])):
           logging.debug("Removing member: " + str(i) + " for spaces only (\s+) attribute")
           self.team_diqualifications_by_attr[attr].append(member[self.team_idx_name])
