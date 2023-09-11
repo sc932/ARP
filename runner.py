@@ -60,9 +60,16 @@ def main():
     if "all_one" in config and config["all_one"] is not None:
         do_all = True
         all_one = True
+        if "p_threshold" in config:
+            logging.warning("setting p_threshold is not compatible with -ao mode, setting p_threshold to 1")
+            p_thresh = 1
+
     elif "all" in config and config["all"] is not None:
         do_all = True
         all_one = False
+        if "p_threshold" in config:
+            logging.warning("setting p_threshold is not compatible with -a mode, setting p_threshold to 1")
+            p_thresh = 1
     else:
         do_all = False
         all_one = False
