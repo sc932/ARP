@@ -26,5 +26,65 @@ class UpMidDownBasisSpace(BasisSpace):
 class SymetricUpDownTwo(BasisSpace):
     def __init__(self):
         self.basis_functions = []
-        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1]))
-        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1]))
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+
+class SymetricUpDownFour(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, -1, -1])) # Q1 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, -1, 1, -1])) # Q3 only
+
+class SymetricUpDownSix(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, -1, -1])) # Q1 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, -1, 1, -1])) # Q3 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, -1, 0])) # Q1 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 0, 1, 0])) # Q3 only, tapered
+
+class SymetricUpDownEight(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, 1, 0])) # Q1 & Q3, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[0, 1, 0, 1])) # Q2 & Q4, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, -1, -1])) # Q1 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, -1, 1, -1])) # Q3 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, -1, 0])) # Q1 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 0, 1, 0])) # Q3 only, tapered
+
+class SymetricUpDownTen(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, 1, 0])) # Q1 & Q3, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[0, 1, 0, 1])) # Q2 & Q4, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, -1, -1])) # Q1 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, -1, 1, -1])) # Q3 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, -1, 0])) # Q1 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 0, 1, 0])) # Q3 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 1, -1, 1])) # Q1 & Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, 1, 1])) # Q2 & Q3 & Q4
+
+class SymetricUpDownTwelve(BasisSpace):
+    def __init__(self):
+        self.basis_functions = []
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, 1, -1])) # Q1 & Q3
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, -1, 1])) # Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, 1, 0])) # Q1 & Q3, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[0, 1, 0, 1])) # Q2 & Q4, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, -1, -1, -1])) # Q1 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, -1, 1, -1])) # Q3 only
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 0, -1, 0])) # Q1 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 0, 1, 0])) # Q3 only, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 1, -1, 1])) # Q1 & Q2 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[-1, 1, 1, 1])) # Q2 & Q3 & Q4
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[1, 1, 0, 1])) # Q1 & Q2 & Q4, tapered
+        self.basis_functions.append(UpDownBasisFunction(function_shape=[0, 1, 1, 1])) # Q2 & Q3 & Q4, tapered

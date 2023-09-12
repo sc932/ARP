@@ -1,6 +1,6 @@
 import argparse
 import scorer
-from basis_space import UpDownBasisSpace, UpMidDownBasisSpace, SymetricUpDownTwo, BasisSpace
+from basis_space import *
 import matplotlib.backends.backend_pdf
 import csv
 
@@ -14,7 +14,7 @@ parser.add_argument("yml", help=".yml file with config values")
 parser.add_argument("-p", "--p-threshold", help="p-val threshold for when to print output", default=0.05)
 parser.add_argument("-v", "--verbose", help="verbosity of logging [10: Debug, 20: Info <default>, 30: Warning, etc]", default=20)
 parser.add_argument("-o", "--output", help="the name of the output file <default: [name of .yml file + _output]>")
-parser.add_argument("-b", "--basis", help="which basis space to use (see paper) [UpDown, UpMidDown, SymTwo]", default="SymTwo")
+parser.add_argument("-b", "--basis", help="which basis space to use (see paper) [UpDown, UpMidDown, SymTwo, SymFour, SymSix, SymEight, SymTen, SymTwelve]", default="SymTwo")
 parser.add_argument("-a", "--all", help="perform the analysis for each basis function in the basis space individually", action=argparse.BooleanOptionalAction)
 parser.add_argument("-ao", "--all-one", help="perform the analysis for each basis function in the basis space individually AND put it all in one file", action=argparse.BooleanOptionalAction)
 args = parser.parse_args()
@@ -48,6 +48,16 @@ def main():
 
     if basis == "SymTwo":
         basis_space = SymetricUpDownTwo()
+    if basis == "SymFour":
+        basis_space = SymetricUpDownFour()
+    if basis == "SymSix":
+        basis_space = SymetricUpDownSix()
+    if basis == "SymEight":
+        basis_space = SymetricUpDownEight()
+    if basis == "SymTen":
+        basis_space = SymetricUpDownTen()
+    if basis == "SymTwelve":
+        basis_space = SymetricUpDownTwelve()
     elif basis == "UpMidDown":
         basis_space = UpMidDownBasisSpace()
     elif basis == "UpDown":
