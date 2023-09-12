@@ -69,6 +69,7 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
             csv_content.append(content)
 
         if sum(running_score) > 0:
+            logging.info("Combined Sum")
             plotter.plot_fit(running_score, overall_target_score, target_var, pdf=pdf)
             if not all_one:
                 content = ["Sum"]

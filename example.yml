@@ -9,11 +9,11 @@ team_index: 'OvrTeamID' # column name with group id in it
 target_vars: ['Perf'] # can be one or more, seperated by commas
 
 big_five: # mapping from csv column name to standard Big 5 names, put # in front of those you wish to ignore
-  #Extraverted: 'Extraversion'
-  #Agreeable: 'Agreeable'
-  #Conscientious: 'Conscientious'
-  #Neurotic: 'Neurotic'
-  #Open: 'Open'
+  Extraverted: 'Extraversion'
+  Agreeable: 'Agreeable'
+  Conscientious: 'Conscientious'
+  Neurotic: 'Neurotic'
+  Open: 'Open'
 
 ### OPTIONAL CONFIGS ###
 # Leave blank like this []
