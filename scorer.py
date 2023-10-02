@@ -68,15 +68,14 @@ def combiner(dataset_yml, basis_space_to_use, p_thresh=0.05, scorer=None, output
             content.extend(basis_scores)
             csv_content.append(content)
 
-        if sum(running_score) > 0:
-            logging.info("Combined Sum")
-            plotter.plot_fit(running_score, overall_target_score, target_var, pdf=pdf)
-            if not all_one:
-                content = ["Sum"]
-            else:
-                content = ["Sum_b-" + str(basis_function.csv_safe_shape())]
-            content.extend(running_score)
-            csv_content.append(content)
+        plotter.plot_fit(running_score, overall_target_score, target_var, pdf=pdf)
+        if not all_one:
+            content = ["Sum"]
+        else:
+            content = ["Sum_b-" + str(basis_function.csv_safe_shape())]
+        content.extend(running_score)
+        csv_content.append(content)
+        logging.info("Combined Sum")
 
         # PLOT SUM HERE
         plotter.plot_full_analysis_for_sum(scorer, target_var, best_basis_functions, p_thresh=p_thresh*2, pdf=pdf)
