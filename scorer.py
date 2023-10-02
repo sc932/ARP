@@ -137,7 +137,7 @@ class Scorer(object):
                             y = attr2_vals[i]
                             r, theta = utils.polar_from_x_y(x, y, x_offset=self.dataset.attr_means[a1], y_offset=self.dataset.attr_means[a2])
                             bs = basis_function.eval(theta)
-                            basis_score += r*bs
+                            basis_score += r*bs / numpy.sqrt(2)
                         target_scores.append(target_score)
                         basis_scores.append(basis_score)
                     # now we have all the scores for this basis func
