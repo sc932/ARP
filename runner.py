@@ -6,6 +6,8 @@ import csv
 
 import logging
 
+# TODO: Error check python runner.py example.yml -v 20 -b SymTwelve
+
 parser = argparse.ArgumentParser(description=
                                  """This will run through the code described in [paper X].\n
                                  For more information see [website Y]."""
